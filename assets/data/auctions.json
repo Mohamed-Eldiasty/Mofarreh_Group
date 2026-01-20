@@ -1,0 +1,20 @@
+{
+  "auctions": [
+    {
+      "id": 1,
+      "title": "مزاد معدات بناء - بالرياض",
+      "status": "جارية",
+      "kind": "أونلاين",
+      "startDate": "2026-01-25",
+      "endDate": "2026-01-28",
+      "location": "الرياض",
+      "heroImage": "assets/img/auction1.jpg",
+      "gallery": [
+        "assets/img/auction1.jpg",
+        "assets/img/auction2.jpg"
+      ],
+      "description": "رافعات ومولدات ومكائن لحام وعدد صناعية.",
+      "terms": "الدخول متاح للمسجلين، تُسدّد العربون قبل المشاركة."
+    }
+  ]
+}

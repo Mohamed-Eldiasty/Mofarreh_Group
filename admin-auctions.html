@@ -1,0 +1,62 @@
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>لوحة المزادات</title>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>body{padding:16px} input,textarea,select{width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px}.box{border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin:10px 0;background:#fff} pre{max-height:320px;overflow:auto;background:#f8fafc;padding:10px;border-radius:8px}</style>
+</head>
+<body>
+  <h1>لوحة المزادات</h1>
+  <div class="box">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <label>العنوان<input id="title" placeholder="مزاد معدات..."/></label>
+      <label>الحالة<select id="status"><option>جارية</option><option>قادمة</option><option>منتهية</option></select></label>
+      <label>النوع<select id="kind"><option>حضوري</option><option>أونلاين</option><option>ظرف مغلق</option></select></label>
+      <label>تاريخ البداية<input id="start" type="date"/></label>
+      <label>تاريخ النهاية<input id="end" type="date"/></label>
+      <label>المدينة<input id="loc" placeholder="الرياض"/></label>
+      <label>الصورة الأساسية<input id="hero" placeholder="assets/img/hero.jpg"/></label>
+      <label>المعرض (أسماء مفصولة بفواصل)<input id="gallery" placeholder="assets/img/1.jpg, assets/img/2.jpg"/></label>
+    </div>
+    <label>وصف المزاد<textarea id="desc" rows="3"></textarea></label>
+    <label>الشروط<textarea id="terms" rows="3"></textarea></label><br>
+    <button id="add" class="btn">إضافة</button>
+  </div>
+
+  <div class="box">
+    <h2>البيانات</h2>
+    <pre id="preview"></pre>
+    <button id="export" class="btn alt">تنزيل auctions.json</button>
+  </div>
+
+<script>
+const DB={ auctions:[] };
+const $=id=>document.getElementById(id);
+$('add').onclick=()=>{
+  const obj={
+    id: Date.now(),
+    title: $('title').value.trim(),
+    status: $('status').value,
+    kind: $('kind').value,
+    startDate: $('start').value,
+    endDate: $('end').value,
+    location: $('loc').value.trim(),
+    heroImage: $('hero').value.trim(),
+    gallery: $('gallery').value.split(/\s*,\s*/).filter(Boolean),
+    description: $('desc').value,
+    terms: $('terms').value
+  };
+  if(!obj.title){alert('اكتب العنوان');return;}
+  DB.auctions.push(obj);
+  ['title','loc','hero','gallery','desc','terms'].forEach(id=>$(id).value="");
+  render();
+};
+function render(){ $('preview').textContent=JSON.stringify(DB,null,2); }
+$('export').onclick=()=>{ const b=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='auctions.json'; a.click(); };
+render();
+</script>
+</body>
+</html>

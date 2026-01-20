@@ -1,0 +1,36 @@
+{
+  "equipment": [
+    {
+      "id": 601,
+      "title": "تنك ديزل أرضي سعة كبيرة",
+      "condition": "مستعمل",
+      "price": 0,
+      "currency": "SAR",
+      "location": "الدمام",
+      "specs": [
+        "معدن سميك",
+        "سلالم جانبية",
+        "صمامات سفلية"
+      ],
+      "images": [
+        "assets/img/auction1.jpg"
+      ],
+      "posted": "2026-01-19"
+    }
+  ],
+  "scrap": [
+    {
+      "id": 701,
+      "title": "سكراب خزانات معدنية — كمية",
+      "location": "الدمام",
+      "specs": [
+        "يُباع بالوزن",
+        "تحميل متاح"
+      ],
+      "images": [
+        "assets/img/auction3.jpg"
+      ],
+      "posted": "2026-01-19"
+    }
+  ]
+}

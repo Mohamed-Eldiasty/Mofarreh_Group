@@ -1,0 +1,76 @@
+
+:root{ --primary:#7c1f26; --accent:#111827; --text:#0f172a; --muted:#64748b; --bg:#ffffff; --bg-soft:#f8fafc; --radius:12px; }
+*{box-sizing:border-box}
+html{direction: rtl}
+body{ margin:0; font-family: 'Tajawal', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif; color:var(--text); background:var(--bg); }
+.container{width:min(1200px, 92%); margin-inline:auto}
+header{ position:sticky; top:0; z-index:1000; background:#fff; border-bottom:1px solid #e2e8f0 }
+header .wrap{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 0}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit}
+nav{display:flex; gap:16px; flex-wrap:wrap}
+nav a{color:var(--text); text-decoration:none; font-weight:600}
+.menu-tools{display:flex; gap:8px}
+.lang-btn,.settings-btn{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;cursor:pointer}
+.hero{padding:56px 0; background:linear-gradient(135deg, #f8fafc, #fff)}
+.hero h1{font-size:clamp(26px,3.4vw,44px); margin:0 0 8px; color:var(--primary)}
+.hero p{font-size:clamp(15px,2vw,19px); color:var(--muted); margin:0 0 16px}
+.btn{display:inline-block; background:var(--primary); color:#fff; padding:12px 18px; border-radius:10px; text-decoration:none; font-weight:700}
+.btn.alt{background:var(--accent)}
+section{padding:40px 0}
+.section-title{font-size:26px; margin:0 0 18px; color:var(--primary)}
+.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+.card{border:1px solid #e2e8f0; border-radius:var(--radius); background:#fff; padding:18px}
+.card h3{margin:6px 0 8px}
+.card p{margin:0; color:var(--muted)}
+.features .card{display:flex; gap:12px; align-items:flex-start}
+.features .icon{width:36px; height:36px; border-radius:8px; background:var(--bg-soft); display:grid; place-items:center; color:var(--primary); font-size:20px}
+
+/* Categories */
+.cats{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+.cat{display:flex; align-items:center; gap:14px; border:1px solid #e2e8f0; border-radius:12px; padding:16px; text-decoration:none; color:inherit; background:#fff}
+.cat .ci{width:48px; height:48px; display:grid; place-items:center; border-radius:10px; background:#fff1f2; color:var(--primary); font-size:22px}
+
+/* Listing cards */
+.listing-card{display:grid; grid-template-columns:220px 1fr; gap:14px; border:1px solid #e2e8f0; border-radius:12px; background:#fff; overflow:hidden}
+.listing-card .thumb{background:#f1f5f9; background-size:cover; background-position:center}
+.listing-card .content{padding:14px}
+.listing-card .meta{display:flex; gap:8px; flex-wrap:wrap; color:#475569; margin:.2rem 0 .4rem}
+.listing-card .price{font-weight:800; color:var(--primary)}
+
+/* Badges */
+.badge{display:inline-block; padding:4px 10px; border-radius:999px; font-size:12px; background:#eef2ff; color:#1e293b; margin-inline-start:6px}
+.status-جارية,.status-Current{background:#dcfce7;color:#14532d}
+.status-قادمة,.status-Upcoming{background:#fff7ed;color:#8a2c0a}
+.status-منتهية,.status-Ended{background:#fee2e2;color:#7f1d1d}
+
+/* Auctions */
+.filters{display:flex; gap:12px; margin-bottom:16px}
+.auction-card{display:grid; grid-template-columns:160px 1fr; border:1px solid #e2e8f0; border-radius:12px; overflow:hidden; text-decoration:none; color:inherit; background:#fff}
+.auction-card .thumb{background-size:cover; background-position:center}
+.auction-card .content{padding:12px}
+.auction-hero{display:grid; grid-template-columns:1.2fr 1fr; gap:20px}
+.auction-hero .gallery{display:flex; gap:10px}
+.auction-hero .gallery img{width:100%; border-radius:10px}
+.meta-line{display:flex; flex-wrap:wrap; gap:10px; color:var(--muted)}
+
+footer{background:#0b1020; color:#cbd5e1; padding:28px 0; margin-top:36px}
+footer a{color:#e2e8f0; text-decoration:none}
+.footer-grid{display:grid; grid-template-columns:2fr 1fr 1fr; gap:18px}
+
+@media (max-width: 900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .listing-card{grid-template-columns:1fr}
+  .auction-card{grid-template-columns:1fr}
+  .auction-hero{grid-template-columns:1fr}
+}
+@media (max-width: 650px){
+  nav{display:none; position:absolute; top:58px; right:0; background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:10px; width:80%; box-shadow:0 6px 24px rgba(0,0,0,.08)}
+  nav.open{display:flex; flex-direction:column}
+  .menu-toggle{display:block; background:none; border:1px solid #e2e8f0; padding:8px 12px; border-radius:8px}
+  .grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .cats{grid-template-columns:1fr}
+}
+
+a:hover{opacity:.92}

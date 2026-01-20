@@ -1,0 +1,59 @@
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>لوحة المحتوى — معدات/سكراب</title>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>body{padding:16px} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}input,textarea,select{width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:8px}.box{border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin:10px 0;background:#fff} pre{max-height:320px;overflow:auto;background:#f8fafc;padding:10px;border-radius:8px}</style>
+</head>
+<body>
+  <h1>لوحة المحتوى — معدات / سكراب</h1>
+  <div class="box">
+    <h2>إضافة بند</h2>
+    <div class="grid2">
+      <label>الفئة<select id="cat"><option value="equipment">معدات</option><option value="scrap">سكراب</option></select></label>
+      <label>العنوان<input id="title" placeholder="اسم المعدة / نوع السكراب"/></label>
+      <label>الحالة<input id="cond" placeholder="مستعمل / سكراب"/></label>
+      <label>السعر (SAR) — اتركه 0 للسكراب<input id="price" type="number" value="0"/></label>
+      <label>المدينة<input id="loc" placeholder="الدمام"/></label>
+      <label>الصور (أسماء/روابط مفصولة بفواصل)<input id="imgs" placeholder="assets/img/photo1.jpg, assets/img/photo2.jpg"/></label>
+    </div>
+    <label>المواصفات (كل سطر ميزة)<textarea id="specs" rows="4" placeholder="سنة 2018&#10;ديزل&#10;شوكة 3م"></textarea></label><br>
+    <button id="add" class="btn">إضافة إلى القائمة</button>
+  </div>
+
+  <div class="box">
+    <h2>المحتوى الحالي</h2>
+    <pre id="preview"></pre>
+    <button id="export" class="btn alt">تنزيل listings.json</button>
+  </div>
+
+<script>
+const DB = { equipment: [], scrap: [] };
+const $ = id=>document.getElementById(id);
+$('add').onclick = ()=>{
+  const cat = $('cat').value; const title = $('title').value.trim();
+  if(!title){ alert('اكتب عنوانًا'); return; }
+  const item = {
+    id: Date.now(),
+    title,
+    condition: $('cond').value.trim(),
+    price: parseInt($('price').value||'0',10)||0,
+    currency: 'SAR',
+    location: $('loc').value.trim(),
+    specs: $('specs').value.split(/\n+/).map(s=>s.trim()).filter(Boolean),
+    images: $('imgs').value.split(/\s*,\s*/).filter(Boolean),
+    posted: new Date().toISOString().slice(0,10)
+  };
+  DB[cat].push(item);
+  ['title','cond','price','loc','imgs','specs'].forEach(id=> $(id).value = (id==='price'?'0':''));
+  render();
+};
+function render(){ $('preview').textContent = JSON.stringify(DB, null, 2); }
+$('export').onclick = ()=>{ const blob = new Blob([JSON.stringify(DB, null, 2)], {type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='listings.json'; a.click(); };
+render();
+</script>
+</body>
+</html>
